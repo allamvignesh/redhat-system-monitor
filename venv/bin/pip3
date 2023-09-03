@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/mnt/d/Documents/Python/New folder/redhat-system-monitor/venv/bin/python" "$0" "$@"
-' '''
+#!/home/vigneshallam/redhat-system-monitor/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

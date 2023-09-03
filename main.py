@@ -1,3 +1,8 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route("/getsysteminfo")
 def getSystemInfo():
 
     from subprocess import run
@@ -37,7 +42,8 @@ def getSystemInfo():
                 d[i[j]] = i[j+1]
         networks[ind] = d
 
-    return {
+
+    data = {
             "os":os,
             "kernel":kernel,
             "hostname":hostname,
@@ -46,3 +52,13 @@ def getSystemInfo():
             "ram_info": ram_info,
             "networks_info": networks
             }
+    extra = request.args.get('extra')
+    if extra:
+        data['extra'] = extra
+    
+    response = jsonify(data)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response, 200
+
+if __name__ == "__main__":
+    app.run(debug=True)
