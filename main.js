@@ -3,6 +3,11 @@ let ram_free = Array(10).fill(0)
 let ram_buff = Array(10).fill(0)
 let tot = 0
 let storageFreePercent = 0
+let os = ""
+let kernel = ""
+let hostname = ""
+let cpu = ""
+
 
 setInterval(() => {
 	fetch(`http://127.0.0.1:5000/getsysteminfo`)
@@ -18,6 +23,19 @@ setInterval(() => {
         storageFreePercent = Number(res.disk_info[0]["Use%"].replace("%", ""))
         storageChart.data.datasets[0].data = [100-storageFreePercent, storageFreePercent]
         storageChart.update()
+
+        os = res.os
+        kernel = res.kernel
+        hostname = res.hostname
+        cpu = res.cpu
+        
+        document.getElementById("systemInfoOS").innerText = os
+        document.getElementById("systemInfoKernel").innerText = kernel
+        document.getElementById("systemInfoHostname").innerText = hostname
+        document.getElementById("systemInfoCPU").innerText = cpu
+
+        updateDiskTable(res.disk_info)
+        updateNetworksTable(res.networks_info)
     })
 
 }, 500);
@@ -83,3 +101,49 @@ const storageChart = new Chart(pie, {
           }]
     }
 })
+
+function updateDiskTable(data) {
+    let table = document.getElementById("diskInfo")
+    table.innerHTML = ""
+    let tr = document.createElement("tr")
+    for (var col in data[0]) {
+        let th = document.createElement("th")
+        th.innerText = col
+        tr.append(th)
+    }
+    table.append(tr)
+    for (var row in data) {
+        let tr = document.createElement("tr")
+        for (var col in data[row]) {
+            let td = document.createElement("td")
+            td.innerText = data[row][col]
+            tr.append(td)
+        }
+        table.append(tr)
+    }
+}
+
+function updateNetworksTable(data) {
+    let table = document.getElementById("networkInfo")
+    table.innerHTML = ""
+    let tr = document.createElement("tr")
+    let labels = ["interface", "ether", "inet", "inet6", "netmask", "packets"]
+    for (var col in labels) {
+        let th = document.createElement("th")
+        th.innerText = labels[col]
+        tr.append(th)
+    }
+    table.append(tr)
+
+    for (var network in data) {
+        let tr = document.createElement("tr")
+        for (var col in labels) {
+            let td = document.createElement("td")
+            if (col == 0) {
+                td.innerHTML = data[network][labels[col]].slice(0, -1)
+            } else td.innerText = data[network][labels[col]]
+            tr.append(td)
+        }
+        table.append(tr)
+    }
+}

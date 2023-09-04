@@ -27,6 +27,11 @@ def getSystemInfo():
         for ind, j in enumerate(list(filter(None, i.split(" ")))):
             fs[labels[ind]] = j
         disk_info[k] = fs
+    disk_info.pop()
+    
+    for i, j in enumerate(disk_info):
+        if j["Mounted on"] == "/":
+            disk_info.insert(0, disk_info.pop(i))
 
     ram_memory = list(filter(None, run(['free'], capture_output=True, text=True).stdout.split("\n")[1].split(" ")))
     ram_info = {"used": ram_memory[2], "free": ram_memory[3], "buff": ram_memory[5], "total": ram_memory[1]}
