@@ -28,7 +28,7 @@ def getSystemInfo():
             fs[labels[ind]] = j
         disk_info[k] = fs
 
-    ram_memory = list(filter(None, run(['free', '-h'], capture_output=True, text=True).stdout.split("\n")[1].split(" ")))
+    ram_memory = list(filter(None, run(['free'], capture_output=True, text=True).stdout.split("\n")[1].split(" ")))
     ram_info = {"used": ram_memory[2], "free": ram_memory[3], "buff": ram_memory[5], "total": ram_memory[1]}
 
     networks = [list(filter(None, i.split(" "))) for i in run(['ifconfig'], capture_output=True, text=True).stdout.split("\n\n")[:-1]]
