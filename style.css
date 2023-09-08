@@ -1,14 +1,21 @@
-.ramchart {
-    max-height: 350px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    font-family: poppins;
+    margin: 0;
+    pad: 0;
 }
 
-.storagechart {
-    max-height: 350px;
+body {
+    font-size: 18px;
 }
 
 table {
-    font-family: arial, sans-serif;
     border-collapse: collapse;
+}
+
+th {
+    font-size: 1.05em;
 }
 
 td, th {
@@ -19,4 +26,36 @@ td, th {
 
 tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+header {
+    padding-block: 1em;
+    background-color: #151515;
+    color: #fff;
+    padding-left: 2em;
+}
+
+.main {
+    padding: 2em;
+}
+
+.top, .bottom{
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 2em;
+}
+
+.ramchart {
+    min-width: 36em;
+}
+
+.label {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1em;
+}
+
+#diskInfo {
+    height: 10px;
+    overflow: scroll;
 }
