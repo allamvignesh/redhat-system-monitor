@@ -87,11 +87,10 @@ const storageChart = new Chart(pie, {
     type: 'pie',
     data: {
         labels: [
-            'Free',
-            'Used'
+            '%Free',
+            '%Used'
           ],
           datasets: [{
-            label: 'My First Dataset',
             data: [storageFreePercent, 100-storageFreePercent],
             backgroundColor: [
               'rgb(255, 99, 132)',
@@ -114,12 +113,14 @@ function updateDiskTable(data) {
     table.append(tr)
     for (var row in data) {
         let tr = document.createElement("tr")
-        for (var col in data[row]) {
-            let td = document.createElement("td")
-            td.innerText = data[row][col]
-            tr.append(td)
+        if (data[row]["Used"] != 0) {
+            for (var col in data[row]) {
+                let td = document.createElement("td")
+                td.innerText = data[row][col]
+                tr.append(td)
+            }
+            table.append(tr)
         }
-        table.append(tr)
     }
 }
 
