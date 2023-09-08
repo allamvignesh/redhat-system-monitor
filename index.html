@@ -11,30 +11,65 @@
     <title>System Monitor</title>
 </head>
 <body>
-    <div class="ramchart">
-        <canvas id="ramChart"></canvas>
-    </div>
-    <div class="storagechart">
-        <canvas id="storageChart"></canvas>
-    </div>
+    <header>
+        <div class="title">
+            Red Hat System Monitor
+        </div>
+    </header>
 
-    <table id="diskInfo">
-    </table> 
-    <div id="systemInfo">
-        <div>
-            <p><strong>OS: </strong><span id="systemInfoOS"></span></p>
-        </div>
-        <div>
-            <p><strong>CPU: </strong><span id="systemInfoCPU"></span></p>
-        </div>
-        <div>
-            <p><strong>Kernel: </strong><span id="systemInfoKernel"></span></p>
-        </div>
-        <div>
-            <p><strong>Hostname: </strong><span id="systemInfoHostname"></span></p>
+    <div class="main">
+        <div class="top">
+            <div id="systemInfo">
+                <div class="label">
+                    <h3>System Info</h3>
+                </div>
+                <div>
+                    <p><strong>OS: </strong><span id="systemInfoOS"></span></p>
+                </div>
+                <div>
+                    <p><strong>CPU: </strong><span id="systemInfoCPU"></span></p>
+                </div>
+                <div>
+                    <p><strong>Kernel: </strong><span id="systemInfoKernel"></span></p>
+                </div>
+                <div>
+                    <p><strong>Hostname: </strong><span id="systemInfoHostname"></span></p>
+                </div>
+            </div>
+
+            <div class="storagechart">
+                <div class="label">
+                    <h3>Storage Used</h3>
+                </div>
+                <canvas id="storageChart"></canvas>
+            </div>
+
+            <div class="ramchart">
+                <div class="label">
+                    <h3>RAM Usage</h3>
+                </div>
+                <canvas id="ramChart"></canvas>
+            </div>
+            
+            </div>
+
+        <div class="bottom">
+            <div class="diskInfo">
+                <div class="label">
+                    <h3>Disk Info</h3>
+                </div>
+                <table id="diskInfo">
+                </table> 
+            </div>
+            
+            <div class="networkInfo">
+                <div class="label">
+                    <h3>Network Info</h3>
+                </div>
+                <table id="networkInfo">
+                </table>
+            </div>
         </div>
     </div>
-    <table id="networkInfo">
-    </table> 
 </body>
 </html>
