@@ -1,5 +1,16 @@
 from flask import Flask, request, jsonify
 
+"""
+    Commands to run:
+        cat /etc/os-release
+        uname -r
+        hostname
+        lscpu
+        df -h
+        free -h
+        ifconfig
+"""
+
 app = Flask(__name__)
 
 @app.route("/getsysteminfo")
